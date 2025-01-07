@@ -150,4 +150,9 @@ app.get('/send-daily-verse', async (c) => {
     }
 });
 
-export default app;
+export default {
+    ...app,
+    async scheduled(event: any, env: any, ctx: any) {
+        ctx.waitUntil(sendDailyVerse(env));
+    },
+};

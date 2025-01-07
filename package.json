@@ -1,7 +1,7 @@
 {
   "name": "versetul-zilei",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --test-scheduled",
     "deploy": "wrangler deploy --minify"
   },
   "dependencies": {
