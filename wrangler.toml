@@ -4,6 +4,8 @@ compatibility_date = "2025-01-06"
 
 compatibility_flags = [ "nodejs_compat" ]
 
+keep_vars = true
+
 [triggers]
 crons = ["30 5 * * *"]  # Daily at 5:30 UTC (7:30 Romania time)
 
@@ -31,6 +33,5 @@ WHATSAPP_GROUP_URL="https://chat.whatsapp.com/Fpezp7iQlxT2oexlxs3kN4"
 # [ai]
 # binding = "AI"
 
-# [observability]
-# enabled = true
-# head_sampling_rate = 1
+[observability.logs]
+enabled = true
