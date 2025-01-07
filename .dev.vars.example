@@ -1,0 +1,6 @@
+WHATSAPP_API_URL="http://localhost:3000"
+WHATSAPP_CHAT_ID="120363367569467119@g.us"
+WHATSAPP_SESSION="default"
+WHATSAPP_AUTH_USER="dev"
+WHATSAPP_AUTH_PASS="dev-password"
+WHATSAPP_GROUP_URL="https://chat.whatsapp.com/Fpezp7iQlxT2oexlxs3kN4"

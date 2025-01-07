@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    ports:
+      - "3000:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --entrypoints.web.address=:80
+    labels:
+      - "traefik.enable=true"
+    restart: unless-stopped
+
+  waha:
+    image: devlikeapro/waha:arm
+    container_name: waha
+    environment:
+      - WHATSAPP_SWAGGER_USERNAME=admin
+      - WHATSAPP_SWAGGER_PASSWORD=admin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.waha.rule=Host(`localhost`)"
+      - "traefik.http.routers.waha.entrypoints=web"
+      - "traefik.http.services.waha.loadbalancer.server.port=3000"
+      - "traefik.http.routers.waha.middlewares=auth"
+    restart: unless-stopped
+    volumes:
+      # Store sessions in the .sessions folder (comment it if you're using MongoDB)
+      - './data/sessions:/app/.sessions'
+
+      # Save media files
+      # https://waha.devlike.pro/docs/how-to/storages/#save-media-files-between-the-container-restarts
+      - './data/media:/app/.media'
+
+  middleware:
+    image: traefik:v2.10
+    container_name: traefik-middleware
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - --api.insecure=true
+      - --providers.docker
+    labels:
+      - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_AUTH_USERS}"
+    restart: unless-stopped
