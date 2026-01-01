@@ -4,18 +4,10 @@ compatibility_date = "2025-01-06"
 
 compatibility_flags = [ "nodejs_compat" ]
 
-keep_vars = true
+# Local dev uses .dev.vars, production uses secrets via deploy:secrets
 
 [triggers]
 crons = ["30 5 * * *"]  # Daily at 5:30 UTC (7:30 Romania time)
-
-[env.vars]
-WHATSAPP_API_URL="http://localhost:3000"
-WHATSAPP_CHAT_ID="120363367569467119@g.us"
-WHATSAPP_SESSION="default"
-WHATSAPP_AUTH_USER="dev"
-WHATSAPP_AUTH_PASS="dev-password"
-WHATSAPP_GROUP_URL="https://chat.whatsapp.com/Fpezp7iQlxT2oexlxs3kN4"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"

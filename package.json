@@ -2,14 +2,16 @@
   "name": "versetul-zilei",
   "scripts": {
     "dev": "wrangler dev --test-scheduled",
-    "deploy": "wrangler deploy --minify"
+    "deploy": "wrangler deploy --minify",
+    "deploy:secrets": "node scripts/push-secrets.js | wrangler secret bulk",
+    "deploy:prod": "pnpm run deploy:secrets && pnpm run deploy"
   },
   "dependencies": {
     "hono": "^4.6.16"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241230.0",
-    "wrangler": "^3.96.0"
+    "@cloudflare/workers-types": "^4.20251210.0",
+    "wrangler": "^4.54.0"
   },
   "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }
